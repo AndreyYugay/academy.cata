@@ -32,6 +32,7 @@ public class calculator {
         int a;
         int b;
 
+
         if ((membersExpression.length <= 3 && membersExpression.length != 1) &&
                 (membersExpression[1].equals("+") || membersExpression[1].equals("-") ||
                         membersExpression[1].equals("*") || membersExpression[1].equals("/"))) {
@@ -39,7 +40,7 @@ public class calculator {
                 if (isArabic(membersExpression[2])) {
                     a = Integer.parseInt(membersExpression[0]);
                     b = Integer.parseInt(membersExpression[2]);
-                    calculat(a, b, membersExpression[1]);
+                    System.out.println(calculat(a, b, membersExpression[1]));
                 } else {
                     try {
                         throw new IOException();
@@ -62,7 +63,7 @@ public class calculator {
                                 (membersExpression[1].equals("-") && romanToInt(membersExpression[0]) > romanToInt(membersExpression[2])))) {
                     a = romanToInt(membersExpression[0]);
                     b = romanToInt(membersExpression[2]);
-                    calculat(a, b, membersExpression[1]);
+                    intToRoman(calculat(a, b, membersExpression[1]));
                 } else {
                     try {
                         throw new IOException();
@@ -90,15 +91,15 @@ public class calculator {
         }
     }
 
-    public static void calculat(int a, int b, String znak) {
+    public static int calculat(int a, int b, String znak) {
         if (znak.equals("-")) {
-            System.out.println(a - b);
+            return (a - b);
         } else if (znak.equals("+")) {
-            System.out.println(a + b);
+            return (a + b);
         } else if (znak.equals("*")) {
-            System.out.println(a * b);
-        } else if (znak.equals("/")) {
-            System.out.println((int) (a / b));
+            return (a * b);
+        } else {
+            return ((int) (a / b));
         }
     }
 
@@ -167,6 +168,70 @@ public class calculator {
         } else {
             return 10;
         }
+    }
+
+    public static void intToRoman(int number) {
+        if (number == 100) {
+            System.out.print("C");
+        } else if (number >= 90) {
+            System.out.print("XC");
+            number -= 90;
+        } else if (number >= 80) {
+            System.out.print("LXXX");
+            number -= 80;
+        } else if (number >= 70) {
+            System.out.print("LXX");
+            number -= 70;
+        } else if (number >= 60) {
+            System.out.print("LX");
+            number -= 60;
+        } else if (number >= 50) {
+            System.out.print("l");
+            number -= 50;
+        } else if (number >= 40) {
+            System.out.print("Xl");
+            number -= 40;
+        } else if (number >= 30) {
+            System.out.print("XXX");
+            number -= 30;
+        } else if (number >= 20) {
+            System.out.print("XX");
+            number -= 20;
+        } else if (number >= 10) {
+            System.out.print("X");
+            number -= 10;
+        }
+
+        if (number >= 9) {
+            if (number == 9) {
+                System.out.print("I");
+            }
+            System.out.print("X");
+        } else if (number < 9) {
+            if (number <= 4 && number > 0) {
+                System.out.print("I");
+                if (number <= 3 && number > 1) {
+                    System.out.print("I");
+                    if (number == 3) {
+                        System.out.print("I");
+                    }
+                }
+            }
+            if (number >= 5) {
+                System.out.print("V");
+                if (number >= 6) {
+                    System.out.print("I");
+                    if (number >= 7) {
+                        System.out.print("I");
+                        if (number == 8) {
+                            System.out.print("I");
+                        }
+                    }
+                }
+            }
+
+        }
+
     }
 
 }
